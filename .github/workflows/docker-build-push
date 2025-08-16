@@ -1,8 +1,10 @@
 name: Docker build and push
 
 on:
-  pull_request:
-    types: [closed]
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
     branches: [ "main" ]
   workflow_call:
   push:
@@ -13,7 +15,7 @@ jobs:
   release:
     name: Build & release to DockerHub
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true || github.event_name == 'push' || github.event_name == 'workflow_call'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout
