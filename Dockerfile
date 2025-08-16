@@ -8,6 +8,7 @@ RUN apt-get update && \
     ca-certificates \
     gnupg \
     lsb-release \
+    git-all \
     && rm -rf /var/lib/apt/lists/*
 
 # Install mise-en-place for the root user
