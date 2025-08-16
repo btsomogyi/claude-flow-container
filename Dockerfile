@@ -8,10 +8,8 @@ RUN apt-get update && \
     ca-certificates \
     gnupg \
     lsb-release \
+    git-all \
     && rm -rf /var/lib/apt/lists/*
-
-# Install git
-RUN sudo apt install git-all
 
 # Install mise-en-place for the root user
 RUN curl https://mise.run | sh
