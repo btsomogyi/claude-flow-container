@@ -1,21 +1,13 @@
 name: Docker build and push
 
 on:
-  workflow_run:
-    workflows: ["Docker Image CI"]
-    types:
-      - completed
-    branches: [ "main" ]
-  workflow_call:
   push:
-    tags:
-      - v*.*.*
+    branches: [ "main" ]
 
 jobs:
   release:
     name: Build & release to DockerHub
     runs-on: ubuntu-latest
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout
