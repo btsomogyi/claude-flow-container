@@ -10,6 +10,9 @@ RUN apt-get update && \
     lsb-release \
     && rm -rf /var/lib/apt/lists/*
 
+# Install git
+RUN sudo apt install git-all
+
 # Install mise-en-place for the root user
 RUN curl https://mise.run | sh
 
