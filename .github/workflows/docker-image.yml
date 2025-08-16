@@ -15,6 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: |
-        TAG_NAME="${{ github.ref_name }}"
-        docker build . --file Dockerfile --tag btsomogyi/claude-flow-container:$(date +%s) --tag btsomogyi/claude-flow-container:${TAG_NAME}
+      run:  docker build . --file Dockerfile --tag btsomogyi/claude-flow-container:$(date +%s)
