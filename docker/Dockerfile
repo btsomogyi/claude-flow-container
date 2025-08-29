@@ -36,18 +36,18 @@ RUN /home/claudeflow/.local/bin/mise install node@22 && \
 # Stage 2: Install claude packages
 FROM base AS final
 
-# Create claudeflow user
-RUN useradd -m -s /bin/bash claudeflow && \
-    echo 'claudeflow ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
 # Ensure we're using the claudeflow user
 USER claudeflow
 WORKDIR /home/claudeflow
 
-# Install claude-code and claude-flow alpha.89 globally
+# Install claude-code and claude-flow alpha globally
+ARG CF_ALPHA_VERSION
+RUN echo "$CF_ALPHA_VERSION"
+ENV CF_VERSION="2.0.0-alpha.$CF_ALPHA_VERSION"
+RUN echo "Installing $CF_VERSION"
 ENV PATH="/home/claudeflow/.local/share/mise/shims:${PATH}"
 RUN npm install -g @anthropic-ai/claude-code
-RUN npm install -g claude-flow@alpha
+RUN npm install -g claude-flow@$CF_VERSION
 
 # Default command
 CMD ["/bin/bash"]
